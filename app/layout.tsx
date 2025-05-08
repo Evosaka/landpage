@@ -10,7 +10,10 @@ export const metadata: Metadata = {
   title: "Evosaka | Software Engineering",
   description:
     "Evosaka is a software engineering company focused on creating innovative solutions with a distinctive visual identity.",
-    generator: 'v0.dev'
+    generator: 'v0.dev',
+    icons: {
+      icon: "/images/evosaka-star.png", 
+    },
 }
 
 export default function RootLayout({
