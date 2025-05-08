@@ -4,13 +4,51 @@ import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ChevronDown, Code, Cpu, Database, ExternalLink, Globe, Menu } from "lucide-react"
+import { ChevronDown, Code, Cpu, Database, BrainCircuit, ExternalLink, Globe, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import GlitchText from "@/components/glitch-text"
 import ParallaxStar from "@/components/parallax-star"
- 
+import { link } from "fs"
+
+
 export default function Home() {
+  const projects = [
+    {
+      id: 1,
+      title: "MyCost",
+      description: " Aplicação web full-stack projetada para gerenciamento de custos para lojas, execução de pedidos, e criação de mapas de cotação.",
+      image: "/clients/mycost.png",
+      link: "https://www.mycost.com.br"
+    },
+    {
+      id: 2,
+      title: "QuickTag",
+      description: "Uma solução inteligente para tornar sua cozinha mais eficiente.",
+      image: "/clients/quicktag.png",
+      link: "https://www.quicktag.com.br"
+    },
+    {
+      id: 3,
+      title: "Muttu App",
+      description: "Aplicativo móvel para interação entre pacientes e psicólogos direcionado a empresas.",
+      image: "/clients/muttu.png",
+      link: "https://muttu.com.br"
+    },
+    {
+      id: 4,
+      title: "Recepcionista Virtual",
+      description: "Inteligencia artificial para recepcionistas clientes via Whatsapp, que ajudam a identificar e categorizar os leads, 24/7.",
+      image: "/clients/lucy.png",
+      link: "#contact"
+    }
+  ];
+  const socialLinks = [
+    { name: "LinkedIn", url: "https://linkedin.com/company/evosaka" },
+    { name: "Instagram", url: "https://instagram.com/evo.saka" },
+    { name: "GitHub", url: "https://github.com/Evosaka" }
+  ];
+
   const [scrollY, setScrollY] = useState(0)
   const heroRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -34,16 +72,16 @@ export default function Home() {
 
         <div className="hidden md:flex items-center space-x-8">
           <Link href="#services" className="text-white hover:text-[#e91e63] transition-colors">
-            SERVICES
+            SERVIÇOS
           </Link>
           <Link href="#about" className="text-white hover:text-[#e91e63] transition-colors">
-            ABOUT
+            SOBRE
           </Link>
           <Link href="#projects" className="text-white hover:text-[#e91e63] transition-colors">
-            PROJECTS
+            PROJETOS
           </Link>
           <Link href="#contact" className="text-white hover:text-[#e91e63] transition-colors">
-            CONTACT
+            CONTATO
           </Link>
         </div>
 
@@ -132,10 +170,10 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col md:flex-row justify-center items-center gap-4"
           >
-            <Button className="bg-[#e91e63] hover:bg-[#e91e63]/80 text-white border-none px-8 py-6">OUR WORK</Button>
+            {/* <Button className="bg-[#e91e63] hover:bg-[#e91e63]/80 text-white border-none px-8 py-6">PROJETOS</Button>
             <Button variant="outline" className="border-[#e91e63] text-white hover:bg-[#e91e63]/10 px-8 py-6">
-              CONTACT US
-            </Button>
+              CONTATO
+            </Button> */}
           </motion.div>
         </div>
 
@@ -149,7 +187,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="mb-16 relative">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 relative z-10">
-              <span className="text-[#e91e63]">/</span> OUR SERVICES
+              <span className="text-[#e91e63]">/</span> NOSSOS SERVIÇOS
             </h2>
             <div className="h-px w-full md:w-1/3 bg-gradient-to-r from-[#e91e63] to-transparent"></div>
           </div>
@@ -158,24 +196,25 @@ export default function Home() {
             {[
               {
                 icon: <Code className="h-10 w-10 text-[#e91e63]" />,
-                title: "SOFTWARE DEVELOPMENT",
-                description: "Custom solutions built with cutting-edge technologies to solve complex problems.",
+                title: "DESENVOLVIMENTO DE SOFTWARE",
+                description: "Soluções personalizadas construídas com tecnologias de ponta até a ponta para resolver problemas complexos.",
               },
               {
                 icon: <Globe className="h-10 w-10 text-[#e91e63]" />,
                 title: "WEB APPLICATIONS",
-                description: "Responsive, scalable web applications with immersive user experiences.",
+                description: "Aplicações responsivas, escaláveis e com experiências de usuário imersivas.",
               },
               {
-                icon: <Database className="h-10 w-10 text-[#e91e63]" />,
-                title: "DATA ENGINEERING",
-                description: "Transform raw data into actionable insights with our advanced data solutions.",
+                icon: <BrainCircuit className="h-10 w-10 text-[#e91e63]" />,
+                title: "AGENTES IA",
+
+                description: "Agentes IA que executam tarefas internas complexas e externas com atendimento ao cliente.",
               },
-              {
-                icon: <Cpu className="h-10 w-10 text-[#e91e63]" />,
-                title: "SYSTEM ARCHITECTURE",
-                description: "Designing robust, scalable system architectures for enterprise applications.",
-              },
+              // {
+              //   icon: <Cpu className="h-10 w-10 text-[#e91e63]" />,
+              //   title: "ARQUITETURA DE SISTEMAS",
+              //   description: "Projetar arquiteturas robustas e escaláveis para aplicações empresariais.",
+              // },
             ].map((service, index) => (
               <motion.div
                 key={index}
@@ -207,18 +246,19 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                <span className="text-[#e91e63]">/</span> WHO WE ARE
+                <span className="text-[#e91e63]">/</span> SOBRE NÓS
               </h2>
               <div className="h-px w-2/3 bg-gradient-to-r from-[#e91e63] to-transparent mb-8"></div>
 
               <p className="text-gray-300 mb-6">
-                Evosaka is a forward-thinking software engineering company that thrives on disruption and innovation. We
-                don't just build software; we craft digital experiences that challenge conventions.
+
+                Evosaka é uma empresa de engenharia de software com visão de futuro que prospera com disrupção e inovação. Nós
+                não apenas criamos software; criamos experiências digitais que desafiam convenções.
               </p>
 
               <p className="text-gray-300 mb-6">
-                Our team of expert engineers and designers work at the intersection of technology and creativity,
-                delivering solutions that are as visually striking as they are functionally powerful.
+                Nossa equipe de engenheiros e especialistas trabalha na intersecção entre tecnologia e criatividade,
+                entregando soluções que são tão visualmente impressionantes quanto funcionalmente poderosas.
               </p>
 
               <div className="flex items-center space-x-4 mt-8">
@@ -269,15 +309,16 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="mb-16 relative">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 relative z-10">
-              <span className="text-[#e91e63]">/</span> FEATURED PROJECTS
+              <span className="text-[#e91e63]">/</span> PROJETOS EM DESTAQUE
             </h2>
             <div className="h-px w-full md:w-1/3 bg-gradient-to-r from-[#e91e63] to-transparent"></div>
           </div>
 
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[1, 2, 3, 4].map((item, index) => (
+            {projects.map((project, index) => (
               <motion.div
-                key={index}
+                key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -288,29 +329,31 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 z-20"></div>
 
                 <Image
-                  src={`/placeholder.svg?height=400&width=600`}
-                  alt={`Project ${item}`}
+                  src={project.image}
+                  alt={project.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 <div className="absolute bottom-0 left-0 p-6 z-30">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-[#e91e63] transition-colors">
-                    Project {item}
+                    {project.title}
                   </h3>
                   <p className="text-gray-300 text-sm mb-4 max-w-md">
-                    A cutting-edge solution showcasing our expertise in software engineering and design.
+                    {project.description}
                   </p>
                   <div className="flex items-center space-x-2">
-                    <Button variant="ghost" size="sm" className="text-white hover:text-[#e91e63] p-0 h-auto">
-                      View Details <ExternalLink className="ml-2 h-4 w-4" />
-                    </Button>
+                    <Link href={project.link} target="_blank" className="text-white hover:text-[#e91e63] p-0 h-auto">
+                      <Button variant="ghost" size="sm" className="text-white hover:text-[#e91e63] p-0 h-auto" >
+                        Ver Detalhes <ExternalLink className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+
                   </div>
                 </div>
 
-                {/* Decorative elements */}
                 <div className="absolute top-4 right-4 font-mono text-xs text-[#e91e63] z-30">
-                  PROJECT_{item.toString().padStart(2, "0")}
+                  PROJECT_{project.id.toString().padStart(2, "0")}
                 </div>
               </motion.div>
             ))}
@@ -331,12 +374,12 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                <span className="text-[#e91e63]">/</span> GET IN TOUCH
+                <span className="text-[#e91e63]">/</span> ENTRE EM CONTATO
               </h2>
               <div className="h-px w-2/3 bg-gradient-to-r from-[#e91e63] to-transparent mb-8"></div>
 
               <p className="text-gray-300 mb-8">
-                Ready to disrupt your industry? Let's collaborate on your next groundbreaking project.
+                Pronto para disruptar sua indústria? Vamos colaborar em seu próximo projeto de destaque.
               </p>
 
               <div className="space-y-4 font-mono">
@@ -344,7 +387,7 @@ export default function Home() {
                   <div className="text-[#e91e63] mt-1">{">"}</div>
                   <div>
                     <div className="text-white">EMAIL</div>
-                    <div className="text-gray-400">contact@evosaka.com</div>
+                    <div className="text-gray-400">contato@evosaka.com</div>
                   </div>
                 </div>
 
@@ -361,16 +404,18 @@ export default function Home() {
                   <div>
                     <div className="text-white">FOLLOW US</div>
                     <div className="flex space-x-4 mt-2">
-                      {["Twitter", "LinkedIn", "Instagram", "GitHub"].map((social, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          size="sm"
-                          className="border-[#e91e63]/30 hover:border-[#e91e63] hover:bg-[#e91e63]/10 text-xs"
-                        >
-                          {social}
-                        </Button>
+                      {socialLinks.map((social, index) => (
+                        <a href={social.url} target="_blank" rel="noopener noreferrer" key={index}>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-[#e91e63]/30 hover:border-[#e91e63] hover:bg-[#e91e63]/10 text-xs"
+                          >
+                            {social.name}
+                          </Button>
+                        </a>
                       ))}
+
                     </div>
                   </div>
                 </div>
@@ -384,7 +429,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="bg-black/50 border border-[#e91e63]/20 p-6"
             >
-              <h3 className="text-xl font-bold mb-6">Send us a message</h3>
+              <h3 className="text-xl font-bold mb-6">Mande uma mensagem</h3>
 
               <form className="space-y-4">
                 <div>
@@ -421,11 +466,11 @@ export default function Home() {
                 </div>
 
                 <Button type="submit" className="w-full bg-[#e91e63] hover:bg-[#e91e63]/80 text-white">
-                  SEND MESSAGE
+                  Enviar Mensagem
                 </Button>
               </form>
 
-              <div className="mt-6 text-xs text-gray-500 font-mono">// All fields are required</div>
+              <div className="mt-6 text-xs text-gray-500 font-mono">// Todos os campos são obrigatórios</div>
             </motion.div>
           </div>
         </div>
