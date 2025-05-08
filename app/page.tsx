@@ -101,19 +101,19 @@ export default function Home() {
                   href="#services"
                   className="text-lg font-medium text-white hover:text-[#e91e63] transition-colors"
                 >
-                  SERVICES
+                  SERVIÇOS
                 </Link>
                 <Link href="#about" className="text-lg font-medium text-white hover:text-[#e91e63] transition-colors">
-                  ABOUT
+                  SOBRE
                 </Link>
                 <Link
                   href="#projects"
                   className="text-lg font-medium text-white hover:text-[#e91e63] transition-colors"
                 >
-                  PROJECTS
+                  PROJETOS
                 </Link>
                 <Link href="#contact" className="text-lg font-medium text-white hover:text-[#e91e63] transition-colors">
-                  CONTACT
+                  CONTATO
                 </Link>
               </div>
               <div className="mt-auto p-6 border-t border-[#e91e63]/20">
