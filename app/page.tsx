@@ -379,7 +379,7 @@ export default function Home() {
               <div className="h-px w-2/3 bg-gradient-to-r from-[#e91e63] to-transparent mb-8"></div>
 
               <p className="text-gray-300 mb-8">
-                Pronto para disruptar sua indústria? Vamos colaborar em seu próximo projeto de destaque.
+                Pronto para disruptar a indústria? Vamos colaborar em seu próximo projeto de destaque.
               </p>
 
               <div className="space-y-4 font-mono">
