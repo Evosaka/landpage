@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import GlitchText from "@/components/glitch-text"
 import ParallaxStar from "@/components/parallax-star"
-
+ 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
   const heroRef = useRef<HTMLDivElement>(null)
