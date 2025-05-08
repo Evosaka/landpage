@@ -226,7 +226,7 @@ export default function Home() {
               >
                 <div className="mb-4">{service.icon}</div>
                 <h3 className="text-xl font-bold mb-3 group-hover:text-[#e91e63] transition-colors">{service.title}</h3>
-                <p className="text-gray-400">{service.description}</p>
+                <p className=" text-gray-400">{service.description}</p>
               </motion.div>
             ))}
           </div>
@@ -339,7 +339,7 @@ export default function Home() {
                   <h3 className="text-xl font-bold mb-2 group-hover:text-[#e91e63] transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 text-sm mb-4 max-w-md">
+                  <p className="text-gray-300 text-sm mb-4 max-w-md hidden md:block">
                     {project.description}
                   </p>
                   <div className="flex items-center space-x-2">
